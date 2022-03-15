@@ -28,4 +28,6 @@ class MessageRestController {
   String getMessage() {
     return this.message;
   }
+  
+
 }
