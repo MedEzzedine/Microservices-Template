@@ -9,23 +9,39 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>ConfigServer</artifactId>
+	<artifactId>AnotherClient</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ConfigServer</name>
-	<description>Configuration server based on a git repository.</description>
+	<name>AnotherClient</name>
+	<description>Another client service.</description>
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>2021.0.0</spring-cloud.version>
+		<spring-cloud.version>2021.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>de.codecentric</groupId>
-		    <artifactId>spring-boot-admin-starter-client</artifactId>
-		    <version>2.4.1</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<version>2.2.7.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -58,5 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

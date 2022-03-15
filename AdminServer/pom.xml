@@ -5,37 +5,33 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
+		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>ConfigServer</artifactId>
+	<artifactId>AdminServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ConfigServer</name>
-	<description>Configuration server based on a git repository.</description>
+	<name>AdminServer</name>
+	<description>Admin server using Spring boot admin.</description>
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>2021.0.0</spring-cloud.version>
+		<spring-boot-admin.version>2.6.2</spring-boot-admin.version>
+		<spring-cloud.version>2021.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-server</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>de.codecentric</groupId>
-		    <artifactId>spring-boot-admin-starter-client</artifactId>
-		    <version>2.4.1</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>de.codecentric</groupId>
-		    <artifactId>spring-boot-admin-starter-client</artifactId>
-		    <version>2.4.1</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -44,6 +40,13 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
