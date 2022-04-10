@@ -19,7 +19,7 @@ maven-build:
 docker-build:
   stage: publish
   script:
-    - docker login -u medezz -p 00z1ngy0lk
-    - export IMAGE_NAME="medezz/config-server"
-    - docker build -t ${IMAGE_NAME}:1.0 .
-    - docker push ${IMAGE_NAME}:1.0
+    - docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
+    - export IMAGE_NAME="medez/config-server"
+    - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+    - docker push ${IMAGE_NAME}:${IMAGE_TAG}
