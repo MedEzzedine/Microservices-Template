@@ -1,0 +1,23 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build
+  - publish
+
+maven-build:
+  image: maven:3.8.5-jdk-11-slim
+  stage: build
+  script: "mvn package -B"
+  artifacts:
+    paths:
+      - target/config-server.jar
+
+docker-build:
+  stage: publish
+  script:
+    - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+    - export IMAGE_NAME="${DOCKER_USER}/config-server"
+    - docker build -t ${IMAGE_NAME}:1.0 .
+    - docker push ${IMAGE_NAME}:${VERSION_TAG}
