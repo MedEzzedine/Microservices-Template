@@ -14,12 +14,12 @@ maven-build:
     - "mvn package -B"
   artifacts:
     paths:
-      - target/config-server.jar
+      - ConfigServer/target/*.jar
 
 docker-build:
   stage: publish
   script:
-    - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
-    - export IMAGE_NAME="${DOCKER_USER}/config-server"
+    - docker login -u medezz -p 00z1ngy0lk
+    - export IMAGE_NAME="medezz/config-server"
     - docker build -t ${IMAGE_NAME}:1.0 .
-    - docker push ${IMAGE_NAME}:${VERSION_TAG}
+    - docker push ${IMAGE_NAME}:1.0
