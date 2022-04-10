@@ -9,7 +9,9 @@ stages:
 maven-build:
   image: maven:3.8.5-jdk-11-slim
   stage: build
-  script: "mvn package -B"
+  script: 
+    - "cd ConfigServer"
+    - "mvn package -B"
   artifacts:
     paths:
       - target/config-server.jar
