@@ -1,6 +1,13 @@
 image: docker:latest
 services:
-  - docker:dind
+  - name: docker:dind
+    command: ["--tls=false"]
+  
+variables:
+  DOCKER_DRIVER: overlay
+  DOCKER_HOST: tcp://127.0.0.1:2375/
+  DOCKER_TLS_CERTDIR: ""
+
 
 stages:
   - build
