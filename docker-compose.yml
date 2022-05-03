@@ -5,7 +5,7 @@ services:
         build:
             context: AdminServer
             dockerfile: Dockerfile
-        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/admin-server:latest
+        image: admin-server:latest
         ports:
             - 10001:10001
         networks:
@@ -15,7 +15,7 @@ services:
         build:
             context: ConfigServer
             dockerfile: Dockerfile
-        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/config-server:latest
+        image: config-server:latest
         ports:
             - 8888:8888
         restart: unless-stopped
@@ -26,7 +26,7 @@ services:
         build:
             context: EurekaServer
             dockerfile: Dockerfile
-        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/eureka-server:latest
+        image: eureka-server:latest
         ports:
             - 9102:9102
         restart: unless-stopped
@@ -37,7 +37,7 @@ services:
         build:
             context: Gateway
             dockerfile: Dockerfile
-        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/gateway:latest
+        image: gateway:latest
         ports:
             - 7777:7777
         restart: unless-stopped
@@ -48,7 +48,7 @@ services:
         build:
             context: ConfigClient
             dockerfile: Dockerfile
-        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/client-server:latest
+        image: client-server:latest
         ports:
             - 1436:1436
             - 2346:2346
@@ -60,7 +60,7 @@ services:
         build:
             context: AnotherClient
             dockerfile: Dockerfile
-        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/another-client:latest
+        image: another-client:latest
         ports:
             - 3674:3674
         restart: unless-stopped
