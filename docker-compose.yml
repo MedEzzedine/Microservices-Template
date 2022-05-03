@@ -1,0 +1,71 @@
+version: '2'
+services:
+    admin-server:
+        container_name: AdminServer
+        build:
+            context: AdminServer
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/admin-server:latest
+        ports:
+            - 10001:10001
+        networks:
+            - spring-cloud-network
+    config-server:
+        container_name: ConfigServer
+        build:
+            context: ConfigServer
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/config-server:latest
+        ports:
+            - 8888:8888
+        restart: unless-stopped
+        networks:
+            - spring-cloud-network
+    eureka-server:
+        container_name: EurekaServer
+        build:
+            context: EurekaServer
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/eureka-server:latest
+        ports:
+            - 9102:9102
+        restart: unless-stopped
+        networks:
+            - spring-cloud-network
+    gateway:
+        container_name: Gateway
+        build:
+            context: Gateway
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/gateway:latest
+        ports:
+            - 7777:7777
+        restart: unless-stopped
+        networks:
+            - spring-cloud-network
+    client-server:
+        container_name: ConfigClient
+        build:
+            context: centralized-configuration-client
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/client-server:latest
+        ports:
+            - 1436:1436
+            - 2346:2346
+        restart: unless-stopped
+        networks:
+            - spring-cloud-network
+    another-client:
+        container_name: AnotherClient
+        build:
+            context: AnotherClient
+            dockerfile: Dockerfile
+        image: registry.gitlab.com/TahmkKillerB/client-server-springboot/another-client:latest
+        ports:
+            - 3674:3674
+        restart: unless-stopped
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge

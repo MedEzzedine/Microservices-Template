@@ -1,32 +1,43 @@
 image: docker:latest
-services:
+
+services: 
   - name: docker:dind
     entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
-  
 variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
 
-
 stages:
   - build
-  - publish
+  - package
 
-maven-build:
-  image: maven:3.8.5-jdk-11-slim
+build:
   stage: build
-  script: 
-    - "cd ConfigServer"
-    - "mvn package -B"
+  image: maven:3.8.5-jdk-11-slim
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+  - mvn clean package -f AdminServer/pom.xml 
+  - mvn clean package -f ConfigClient/pom.xml
+  - mvn clean package -f ConfigServer/pom.xml
+  - mvn clean package -f EurekaServer/pom.xml
+  - mvn clean package -f AnotherClient/pom.xml
+  - mvn clean package -f Gateway/pom.xml
   artifacts:
     paths:
+      - AdminServer/target/*.jar
+      - ConfigClient/target/*.jar
       - ConfigServer/target/*.jar
-
-docker-build:
-  stage: publish
-  before_script:
-    - docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
+      - EurekaServer/target/*.jar
+      - AnotherClient/target/*.jar
+      - Gateway/target/*.jar
+      
+images:
+  stage: package
+  image: docker/compose:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
-    - export IMAGE_NAME="medez/config-server"
-    - docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-    - docker push ${IMAGE_NAME}:${IMAGE_TAG}
+  - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker-compose build
+  - docker-compose push --ignore-push-failures
