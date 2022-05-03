@@ -46,7 +46,7 @@ services:
     client-server:
         container_name: ConfigClient
         build:
-            context: centralized-configuration-client
+            context: ConfigClient
             dockerfile: Dockerfile
         image: registry.gitlab.com/TahmkKillerB/client-server-springboot/client-server:latest
         ports:
