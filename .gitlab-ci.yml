@@ -9,9 +9,9 @@ variables:
 
 stages:
   - build
-  - package
+  - push-images
 
-build:
+build-main:
   stage: build
   image: maven:3.8.5-jdk-11-slim
   rules:
@@ -32,13 +32,12 @@ build:
       - AnotherClient/target/*.jar
       - Gateway/target/*.jar
       
-images:
-  stage: package
+push-images-main:
+  stage: push-images
   image: docker/compose:latest
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
-  - docker --version
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
   - docker-compose push --ignore-push-failures
