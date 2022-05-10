@@ -5,7 +5,7 @@ services:
         build:
             context: AdminServer
             dockerfile: Dockerfile
-        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/admin-server:latest
+        image: registry.gitlab.com/c3156/microservice/mohamed-ezzedine/admin-server:latest
         ports:
             - 10001:10001
         depends_on:
@@ -17,7 +17,7 @@ services:
         build:
             context: ConfigServer
             dockerfile: Dockerfile
-        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/config-server:latest
+        image: registry.gitlab.com/c3156/microservice/mohamed-ezzedine/config-server:latest
         ports:
             - 8888:8888
         restart: unless-stopped
@@ -28,7 +28,7 @@ services:
         build:
             context: EurekaServer
             dockerfile: Dockerfile
-        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/eureka-server:latest
+        image: registry.gitlab.com/c3156/microservice/mohamed-ezzedine/eureka-server:latest
         ports:
             - 9102:9102
         restart: unless-stopped
@@ -41,7 +41,7 @@ services:
         build:
             context: Gateway
             dockerfile: Dockerfile
-        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/gateway:latest
+        image: registry.gitlab.com/c3156/microservice/mohamed-ezzedine/gateway:latest
         ports:
             - 7777:7777
         restart: unless-stopped
@@ -55,7 +55,7 @@ services:
         build:
             context: ConfigClient
             dockerfile: Dockerfile
-        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/client-server:latest
+        image: registry.gitlab.com/c3156/microservice/mohamed-ezzedine/client-server:latest
         ports:
             - 1436:1436
             - 2346:2346
@@ -70,7 +70,7 @@ services:
         build:
             context: AnotherClient
             dockerfile: Dockerfile
-        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/another-client:latest
+        image: registry.gitlab.com/c3156/microservice/mohamed-ezzedine/another-client:latest
         ports:
             - 3674:3674
         restart: unless-stopped

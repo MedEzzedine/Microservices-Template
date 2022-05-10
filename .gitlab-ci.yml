@@ -38,6 +38,7 @@ images:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
+  - docker --version
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
   - docker-compose push --ignore-push-failures
