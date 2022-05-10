@@ -5,9 +5,11 @@ services:
         build:
             context: AdminServer
             dockerfile: Dockerfile
-        image: admin-server:latest
+        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/admin-server:latest
         ports:
             - 10001:10001
+        depends_on:
+            - config-server
         networks:
             - spring-cloud-network
     config-server:
@@ -15,7 +17,7 @@ services:
         build:
             context: ConfigServer
             dockerfile: Dockerfile
-        image: config-server:latest
+        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/config-server:latest
         ports:
             - 8888:8888
         restart: unless-stopped
@@ -26,10 +28,12 @@ services:
         build:
             context: EurekaServer
             dockerfile: Dockerfile
-        image: eureka-server:latest
+        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/eureka-server:latest
         ports:
             - 9102:9102
         restart: unless-stopped
+        depends_on:
+            - config-server
         networks:
             - spring-cloud-network
     gateway:
@@ -37,10 +41,13 @@ services:
         build:
             context: Gateway
             dockerfile: Dockerfile
-        image: gateway:latest
+        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/gateway:latest
         ports:
             - 7777:7777
         restart: unless-stopped
+        depends_on:
+            - config-server
+            - eureka-server
         networks:
             - spring-cloud-network
     client-server:
@@ -48,11 +55,14 @@ services:
         build:
             context: ConfigClient
             dockerfile: Dockerfile
-        image: client-server:latest
+        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/client-server:latest
         ports:
             - 1436:1436
             - 2346:2346
         restart: unless-stopped
+        depends_on:
+            - config-server
+            - eureka-server
         networks:
             - spring-cloud-network
     another-client:
@@ -60,12 +70,16 @@ services:
         build:
             context: AnotherClient
             dockerfile: Dockerfile
-        image: another-client:latest
+        image: registry.gitlab.com/tahmkkillerb/client-server-springboot/another-client:latest
         ports:
             - 3674:3674
         restart: unless-stopped
+        depends_on:
+            - config-server
+            - eureka-server
         networks:
             - spring-cloud-network
+            
 networks:
     spring-cloud-network:
         driver: bridge

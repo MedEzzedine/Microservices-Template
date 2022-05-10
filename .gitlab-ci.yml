@@ -40,4 +40,4 @@ images:
   script:
   - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker-compose build
-  - docker-compose push --ignore-push-failures registry.gitlab.com/tahmkkillerb/client-server-springboot
+  - docker-compose push --ignore-push-failures
