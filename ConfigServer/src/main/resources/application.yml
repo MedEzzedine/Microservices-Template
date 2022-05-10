@@ -12,6 +12,7 @@ spring:
     admin:
       client:
         url: http://localhost:10001
+   
 management:
   endpoints:
     web:
