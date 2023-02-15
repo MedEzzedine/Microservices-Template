@@ -11,3 +11,6 @@ This table contains each service in the project and its purpose:
 | Eureka Server   | Acts as a service discovery server        |
 | Gateway Server   | A simple gateway that directs traffic to discovery server       |
 | Admin Server   | Offers a dashboard describing the state of all microservices      |
+
+## To be added
+Planning on adding an authentication server (Keycloak) that communicates with the gateway, in order to increase the security of the architecture using OAuth2.
